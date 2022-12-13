@@ -9,7 +9,7 @@ public class Converter {
         return distance;
     }
     //Калории
-    double printCalories(int month, int sumSteps) {
+    int printCalories(int month, int sumSteps) {
         int calories = sumSteps * 50/1000;
         return calories;
     }

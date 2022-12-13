@@ -11,16 +11,14 @@ public class StepTracker {
     }
 
     //Сохранение количества шагов
-    double saveStepsInDay(int month, int day) {
+    void saveStepsInDay(int month, int day) {
         int steps = scanner.nextInt();
         if (steps<0){
             System.out.println("Количество шагов не должно быть отрицательным!");
-            return stepsInDay[month][day - 1];
         }
         else {
             stepsInDay[month][day - 1] = steps;
             System.out.println("Количество шагов сохранено!");
-            return stepsInDay[month][day - 1];
         }
     }
 
@@ -78,12 +76,12 @@ public class StepTracker {
         for (int i = 0; i < days; i++) {
             if (mission <= stepsInDay[month][i]) {
                 series = series + 1;
-                }
-            else if (bestSeries<series) {
-                bestSeries = series;
-                series=0;
+                if (bestSeries < series) {
+                    bestSeries = series;
                 }
             }
+            else series = 0;
+        }
         return bestSeries;
     }
 }
