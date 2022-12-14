@@ -12,7 +12,7 @@ public class Main {
             int command = scanner.nextInt();
             if (command == 1) {
                 boolean isTrue=true;
-                while(isTrue) {
+                /*while(isTrue) {
                     System.out.println("За какой месяц вы хотите ввести количество шагов: 0-ЯНВ, 1-ФЕВР, 2-МАРТ, 3-АПР, 4-МАЙ, 5-ИЮНЬ, 6-ИЮЛЬ, 7-АВГ, 8-СЕН, 9-ОКТ, 10-НОЯБ, 11-ДЕК?");
                     int month = scanner.nextInt();
                     if (month < 0 || month >= months) {
@@ -30,6 +30,28 @@ public class Main {
                                 }
                             }
                         }
+                    }
+                }*/
+                while(isTrue) {
+                    System.out.println("За какой месяц вы хотите ввести количество шагов: 0-ЯНВ, 1-ФЕВР, 2-МАРТ, 3-АПР, 4-МАЙ, 5-ИЮНЬ, 6-ИЮЛЬ, 7-АВГ, 8-СЕН, 9-ОКТ, 10-НОЯБ, 11-ДЕК?");
+                    int month = scanner.nextInt();
+                    if (month > 0 && month <= months) {
+                        while(isTrue) {
+                            System.out.println("За какой день вы хотите ввести количество шагов?");
+                            int day = scanner.nextInt();
+                            if (day > 0 && day < days) {
+                                while(isTrue) {
+                                    System.out.println("Введите количество шагов.");
+                                    isTrue=stepTracker.saveStepsInDay(month, day, true);
+                                }
+                            }
+                            else {
+                                System.out.println("Такого дня в программе нет! Попробуйте снова.");
+                            }
+                        }
+                    }
+                    else {
+                        System.out.println("Такого месяца в программе нет! Попробуйте снова.");
                     }
                 }
             }
