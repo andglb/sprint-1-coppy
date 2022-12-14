@@ -11,15 +11,17 @@ public class StepTracker {
     }
 
     //Сохранение количества шагов
-    void saveStepsInDay(int month, int day) {
+    boolean saveStepsInDay(int month, int day, boolean isTrue) {
         int steps = scanner.nextInt();
         if (steps<0){
-            System.out.println("Количество шагов не должно быть отрицательным!");
+            System.out.println("Количество шагов не должно быть отрицательным! Попробуйте снова.");
         }
         else {
             stepsInDay[month][day - 1] = steps;
             System.out.println("Количество шагов сохранено!");
+            isTrue=false;
         }
+        return isTrue;
     }
 
     //Статистика шагов за каждый день месяца

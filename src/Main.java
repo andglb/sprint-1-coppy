@@ -11,35 +11,48 @@ public class Main {
             printMenu();
             int command = scanner.nextInt();
             if (command == 1) {
-                System.out.println("За какой месяц вы хотите ввести количество шагов: 0-ЯНВ, 1-ФЕВР, 2-МАРТ, 3-АПР, 4-МАЙ, 5-ИЮНЬ, 6-ИЮЛЬ, 7-АВГ, 8-СЕН, 9-ОКТ, 10-НОЯБ, 11-ДЕК?");
-                int month = scanner.nextInt();
-                if (month<0 || month>=months) {
-                    System.out.println("Такого месяца в программе нет!");
-                }
-                else {
-                    System.out.println("За какой день вы хотите ввести количество шагов?");
-                    int day = scanner.nextInt();
-                    if (day<0 || day>days) {
-                        System.out.println("Такого дня в программе нет!");
-                    }
-                    else {
-                        System.out.println("Введите количество шагов.");
-                        stepTracker.saveStepsInDay(month, day);
+                boolean isTrue=true;
+                while(isTrue) {
+                    System.out.println("За какой месяц вы хотите ввести количество шагов: 0-ЯНВ, 1-ФЕВР, 2-МАРТ, 3-АПР, 4-МАЙ, 5-ИЮНЬ, 6-ИЮЛЬ, 7-АВГ, 8-СЕН, 9-ОКТ, 10-НОЯБ, 11-ДЕК?");
+                    int month = scanner.nextInt();
+                    if (month < 0 || month >= months) {
+                        System.out.println("Такого месяца в программе нет! Попробуйте снова.");
+                    } else {
+                        while(isTrue) {
+                            System.out.println("За какой день вы хотите ввести количество шагов?");
+                            int day = scanner.nextInt();
+                            if (day < 0 || day > days) {
+                                System.out.println("Такого дня в программе нет! Попробуйте снова.");
+                            } else {
+                                while(isTrue) {
+                                    System.out.println("Введите количество шагов.");
+                                    isTrue=stepTracker.saveStepsInDay(month, day, true);
+                                }
+                            }
+                        }
                     }
                 }
             }
             else if (command == 2) {
-                System.out.println("Введите месяц за который нужно вывести статистику: 0-ЯНВ, 1-ФЕВР, 2-МАРТ, 3-АПР, 4-МАЙ, 5-ИЮНЬ, 6-ИЮЛЬ, 7-АВГ, 8-СЕН, 9-ОКТ, 10-НОЯБ, 11-ДЕК");
-                int printMonth = scanner.nextInt();
-                System.out.println("Количество шагов за каждый день месяца: ");
-                stepTracker.printStepsOnTheMonth(printMonth);
-                System.out.println();
-                System.out.println("Сумма шагов за месяц - "+ stepTracker.printSumSteps(printMonth));
-                System.out.println("Максимальное количество шагов за день - "+stepTracker.printMaxSteps(printMonth));
-                System.out.println("Среднее количество шагов за месяц - "+stepTracker.averageNumberOfSteps(printMonth));
-                System.out.println("За месяц пройдено - "+converter.printDistance(printMonth, stepTracker.printSumSteps(printMonth))+" км");
-                System.out.println("За месяц сожжено - "+converter.printCalories(printMonth, stepTracker.printSumSteps(printMonth))+" килокалорий");
-                System.out.println("Лучшая серия за месяц в днях - "+stepTracker.printBestSeries(mission, printMonth));
+                while(true) {
+                    System.out.println("Введите месяц за который нужно вывести статистику: 0-ЯНВ, 1-ФЕВР, 2-МАРТ, 3-АПР, 4-МАЙ, 5-ИЮНЬ, 6-ИЮЛЬ, 7-АВГ, 8-СЕН, 9-ОКТ, 10-НОЯБ, 11-ДЕК");
+                    int printMonth = scanner.nextInt();
+                    if (printMonth<0 || printMonth>=months) {
+                        System.out.println("Такого месяца в программе нет! Попробуйте снова.");
+                    }
+                    else {
+                        System.out.println("Количество шагов за каждый день месяца: ");
+                        stepTracker.printStepsOnTheMonth(printMonth);
+                        System.out.println();
+                        System.out.println("Сумма шагов за месяц - " + stepTracker.printSumSteps(printMonth));
+                        System.out.println("Максимальное количество шагов за день - " + stepTracker.printMaxSteps(printMonth));
+                        System.out.println("Среднее количество шагов за месяц - " + stepTracker.averageNumberOfSteps(printMonth));
+                        System.out.println("За месяц пройдено - " + converter.printDistance(printMonth, stepTracker.printSumSteps(printMonth)) + " км");
+                        System.out.println("За месяц сожжено - " + converter.printCalories(printMonth, stepTracker.printSumSteps(printMonth)) + " килокалорий");
+                        System.out.println("Лучшая серия за месяц в днях - " + stepTracker.printBestSeries(mission, printMonth));
+                        break;
+                    }
+                }
             }
             else if (command == 3) {
                 mission=stepTracker.newMission(mission);
